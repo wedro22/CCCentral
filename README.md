@@ -5,7 +5,4 @@ computerized base in
 Minecraft. To use, download
 the bootloader via pastebin
 
-https://pastebin.com/wPtGKMam
-
-or duplicate:
 https://pastebin.com/kk860VQa

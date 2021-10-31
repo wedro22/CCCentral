@@ -29,7 +29,7 @@ end
 function TurtleTools.selectEmptySlot()
 	local slot = TurtleTools.findEmptySlot()
 	if slot>0 then
-		turtle.select(n)
+		turtle.select(slot)
 	end
 	return slot
 end
@@ -61,31 +61,55 @@ function TurtleTools.getToolsNames()
 	return rightHand, leftHand
 end
 
---[[Checks whether the tool is used
+--[[Checks whether the tools is used
 Parameters
-tool:string exact name, example:
-minecraft:diamond_pickaxe
+tool1, tool2:string exact name, example:
+minecraft:diamond_pickaxe, 
+computercraft:wireless_modem_normal
 Returns
 1. boolean Whether the right tool is worn
 2. string | nil Details, example:
  "No empty slots" - Requires a free slot
  in the inventory for verification
  "Empty Hands" - You can use this hands
- "Empty Hand" - You can use this hand
+ "Empty Hand Right" - You can use this hand
+ "Empty Hand Left" - You can use this hand
  "Not empty hands"
  --]]
-function TurtleTools.equipCheck(tool)
+function TurtleTools.equipCheck(tool1, tool2)
 	local right, left, msg = TurtleTools.getToolsNames()
 	if msg then
 		return false, msg --"No empty slots"
-	elseif right==nil and left==nil then
-		return false, "Empty Hands"
-	elseif right==nil or left==nil then
-		return false, "Empty Hand"
-	elseif right == tool or left == tool then
-		return true
 	end
-	return false, "Not empty hands"
+	if right==nil and left==nil then
+		msg = "Empty Hands"
+	elseif right and left then
+		msg = "Not empty hands"
+	elseif right then
+		msg = "Empty Hand Left"
+	elseif left then
+		msg = "Empty Hand Right"
+	end
+		
+	if tool1==nil and tool2==nil then
+		if right==nil and left==nil then
+			return true, msg
+		else
+			return false, msg
+		end
+	elseif tool1 and tool2 then
+		if (right==tool1 and left==tool2)
+		or (right==tool2 and left==tool1) then
+			return true, msg
+		else
+			return false, msg
+		end
+	else
+		if tool1==right or tool1==left
+		or tool2==right or tool2==left then
+			return true, msg
+		end
+	end
 end
 	
 	

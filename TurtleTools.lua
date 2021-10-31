@@ -1,6 +1,10 @@
 local TurtleTools = {}
 
 function TurtleTools.refuelAll(dofuel, message)
+	dofuel = tonumber(dofuel)
+	if dofuel == 0 then
+		dofuel == 1
+	end
 	if message and turtle.getFuelLevel<dofuel then
 		print(message)
 	end
@@ -8,6 +12,7 @@ function TurtleTools.refuelAll(dofuel, message)
 		sleep(3)
 		shell.run("refuel all")
 	end
+	return true
 end
 
 function findEmptySlot()

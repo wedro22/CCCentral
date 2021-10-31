@@ -1,9 +1,11 @@
 local TurtleTools = {}
 
 function TurtleTools.refuelAll(dofuel, message)
+	if dofuel == nil then
+		dofuel = 1
 	dofuel = tonumber(dofuel)
 	if dofuel == 0 then
-		dofuel == 1
+		dofuel = 1
 	end
 	if message and turtle.getFuelLevel<dofuel then
 		print(message)

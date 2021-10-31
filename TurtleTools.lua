@@ -97,7 +97,7 @@ function TurtleTools.equipCheck(tool1, tool2)
 		else
 			return false, msg
 		end
-	elseif tool1 and tool2 then
+	elseif tool1!=nil and tool2!=nil then
 		if (right==tool1 and left==tool2)
 		or (right==tool2 and left==tool1) then
 			return true, msg
@@ -105,8 +105,8 @@ function TurtleTools.equipCheck(tool1, tool2)
 			return false, msg
 		end
 	else
-		if (tool1 and (tool1==right or tool1==left))
-		or (tool2 and (tool2==right or tool2==left)) then
+		if (tool1!=nil and (tool1==right or tool1==left))
+		or (tool2!=nil and (tool2==right or tool2==left)) then
 			return true, msg
 		end
 	end

@@ -27,7 +27,7 @@ function TurtleTools.findEmptySlot()
 	return 0
 end
 function TurtleTools.selectEmptySlot()
-	local slot = findEmptySlot()
+	local slot = TurtleTools.findEmptySlot()
 	if slot>0 then
 		turtle.select(n)
 	end
@@ -42,7 +42,7 @@ Requires a free slot in the inventory
  for verification. If not, returns 
  nil, nil, "No empty slots"]]
 function TurtleTools.getToolsNames()
-	local slot = selectEmptySlot()
+	local slot = TurtleTools.selectEmptySlot()
 	local rightHand
 	local leftHand
 	if slot == 0 then
@@ -75,7 +75,7 @@ Returns
  "Not empty hands"
  --]]
 function TurtleTools.equipCheck(tool)
-	local right, left, msg = getToolsNames()
+	local right, left, msg = TurtleTools.getToolsNames()
 	if msg then
 		return false, msg --"No empty slots"
 	elseif right==nil and left==nil then

@@ -3,21 +3,22 @@ local TurtleTools = {}
 function TurtleTools.refuelAll(dofuel, message)
 	if dofuel == nil then
 		dofuel = 1
+	end
 	dofuel = tonumber(dofuel)
 	if dofuel == 0 then
 		dofuel = 1
 	end
-	if message and turtle.getFuelLevel<dofuel then
+	if message and turtle.getFuelLevel()<dofuel then
 		print(message)
 	end
-	while turtle.getFuelLevel<dofuel do
+	while turtle.getFuelLevel()<dofuel do
 		sleep(3)
 		shell.run("refuel all")
 	end
 	return true
 end
 
-function findEmptySlot()
+function TurtleTools.findEmptySlot()
 	for n = 1, 16 do
 		if turtle.getItemCount(n) == 0 then
 			return n
@@ -25,7 +26,7 @@ function findEmptySlot()
 	end
 	return 0
 end
-function selectEmptySlot()
+function TurtleTools.selectEmptySlot()
 	local slot = findEmptySlot()
 	if slot>0 then
 		turtle.select(n)
@@ -40,7 +41,7 @@ Returns the right one first,
 Requires a free slot in the inventory
  for verification. If not, returns 
  nil, nil, "No empty slots"]]
-function getToolsNames()
+function TurtleTools.getToolsNames()
 	local slot = selectEmptySlot()
 	local rightHand
 	local leftHand
@@ -73,7 +74,7 @@ Returns
  "Empty Hand" - You can use this hand
  "Not empty hands"
  --]]
-function equipCheck(tool)
+function TurtleTools.equipCheck(tool)
 	local right, left, msg = getToolsNames()
 	if msg then
 		return false, msg --"No empty slots"

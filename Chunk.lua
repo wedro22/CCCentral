@@ -29,7 +29,7 @@ function Chunk:new(x, y, z)
 		
 	--Location in the chank from 0 to 15
 	function obj:getLocal()
-		return obj.xmax-obj.xmin, obj.ymax-obj.ymin, obj.zmax-obj.zmin
+		return obj.x-obj.xmin, obj.y-obj.ymin, obj.z-obj.zmin
 	end
 	
 	--return obj

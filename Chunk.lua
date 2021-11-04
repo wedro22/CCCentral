@@ -5,6 +5,7 @@ Requires raw coordinates x, y (height), z
 Returns Chunk | nil (if the arguments are incorrect)
 --]]
 function Chunk:new(x, y, z)
+	print (x, y, z)
 	if type(x) ~= "number" or type(y) ~= "number" or type(z) ~= "number" then
 		return nil
 	end

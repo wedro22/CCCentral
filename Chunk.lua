@@ -32,6 +32,11 @@ function Chunk:new(x, y, z)
 		return obj.x-obj.xmin, obj.y-obj.ymin, obj.z-obj.zmin
 	end
 	
+	--get x, z Chunk center (offset to a minimum)
+	function obj:getCentral()
+		return obj.xmin+7, obj.zmin+7
+	end
+	
 	--return obj
 	setmetatable(obj, self)
 	self.__index = self

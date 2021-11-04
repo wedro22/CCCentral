@@ -1,4 +1,5 @@
 local TurtleTools = {}
+TurtleTools.str_pickaxe = "minecraft:diamond_pickaxe"
 
 function TurtleTools.dofuelAll(dofuel, message)
 	if dofuel == nil then
@@ -86,22 +87,73 @@ function TurtleTools.getToolNameLeft(tool)
 	return hand, equality
 end
 
+--[[Find item in inventory by name
+ Parameter tool:string exact name,
+ example: minecraft:diamond_pickaxe
+ Returns a slot number (1..16) 
+ or 0 if not detected --]]
+function TurtleTools.findInInventory(tool)
+	for n = 1, 16 do
+		if turtle.getItemCount(n) > 0 then
+			if turtle.getItemDetail().name == tool then
+				return n
+			end
+		end
+	end
+	return 0
+end
 
-
-
-
-
-
-
-
+--[[Equip item in inventory by name
+ Parameter tool:string exact name,
+ example: minecraft:diamond_pickaxe
+ Returns true when equipped --]]
+function TurtleTools.equipTool(tool)
+	local slot
+	while true do
+		slot=TurtleTools.findInInventory(tool)
+		if slot > 0 then
+			turtle.select(slot)
+			if turtle.equipRight() then
+				return true
+			end
+		end
+		sleep(3)
+	end
+end
 	
-	
-	
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 return TurtleTools

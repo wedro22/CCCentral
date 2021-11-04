@@ -26,6 +26,11 @@ function Chunk:new(x, y, z)
 		obj.ymax = obj.ymin + 15
 		obj.zmin = obj.cz * 16
 		obj.zmax = obj.zmin + 15
+		
+	--Location in the chank from 0 to 15
+	function obj:getLocal()
+		return obj.xmax-obj.xmin, obj.ymax-obj.ymin, obj.zmax-obj.zmin
+	end
 	
 	--return obj
 	setmetatable(obj, self)

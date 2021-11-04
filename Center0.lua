@@ -1,3 +1,4 @@
+--package.path="/downloads/CCCentral"
 local turtletools=require "TurtleTools"
 local chunk=require "Chunk"
 
@@ -29,8 +30,8 @@ end
 print("Structures will be built in the middle of the chanks")
 print("Step 1: Finding a location in the world")
 print("Write the current coordinates of the turtle")
-local x=tonumber(write("X: .."))
-local y=tonumber(write("Y: .."))
-local z=tonumber(write("Z: .."))
+write("X:.. "); local x = read()
+write("Y:.. "); local y = read()
+write("Z:.. "); local z = read()
 
 

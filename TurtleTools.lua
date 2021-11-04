@@ -95,7 +95,7 @@ end
 function TurtleTools.findInInventory(tool)
 	for n = 1, 16 do
 		if turtle.getItemCount(n) > 0 then
-			if turtle.getItemDetail().name == tool then
+			if turtle.getItemDetail(n).name == tool then
 				return n
 			end
 		end

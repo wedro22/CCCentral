@@ -1,6 +1,6 @@
 local TurtleTools = {}
 
-function TurtleTools.refuelAll(dofuel, message)
+function TurtleTools.dofuelAll(dofuel, message)
 	if dofuel == nil then
 		dofuel = 1
 	end
@@ -34,84 +34,66 @@ function TurtleTools.selectEmptySlot()
 	return slot
 end
 
---[[Returns the names of the tools used.
-Returns the right one first,
- then the left one. example:
- minecraft:diamond_pickaxe--
-Requires a free slot in the inventory
+--[[Returns the name of the tool used
+ or Check the use of the tool by name.
+Parameter tool:string exact name,
+ example: minecraft:diamond_pickaxe
+ or nil to return the name of the tool used
+Requires a empty slot in the inventory
  for verification. If not, returns 
- nil, nil, "No empty slots"]]
-function TurtleTools.getToolsNames()
+ nil, "No empty slot"
+Returns
+ 1. string 
+  "No empty slot" (Only if there is no empty space in the inventory)
+  | (getting the name of the tool. If the tool name = nil, then returns "")
+ 2. boolean (checking the equality of the tool name and the tool argument) --]]
+function TurtleTools.getToolNameRight(tool)
 	local slot = TurtleTools.selectEmptySlot()
-	local rightHand
-	local leftHand
+	local hand = ""
+	local equality = false
 	if slot == 0 then
-		return nil, nil, "No empty slots"
+		return "No empty slot", equality
 	end
 	turtle.equipRight()
 	if turtle.getItemCount(slot)>0 then
-		rightHand = turtle.getItemDetail().name
+		hand = turtle.getItemDetail().name
+		turtle.equipRight()
 	end
-	turtle.equipRight()
+	if tool!=nil then
+		if tool==hand then
+			equality = true
+		end
+	end
+	return hand, equality
+end
+function TurtleTools.getToolNameLeft(tool)
+	local slot = TurtleTools.selectEmptySlot()
+	local hand = ""
+	local equality = false
+	if slot == 0 then
+		return "No empty slot", equality
+	end
 	turtle.equipLeft()
 	if turtle.getItemCount(slot)>0 then
-		leftHand = turtle.getItemDetail().name
+		hand = turtle.getItemDetail().name
+		turtle.equipLeft()
 	end
-	turtle.equipLeft()
-	return rightHand, leftHand
+	if tool!=nil then
+		if tool==hand then
+			equality = true
+		end
+	end
+	return hand, equality
 end
 
---[[Checks whether the tools is used
-Parameters
-tool1, tool2:string exact name, example:
-minecraft:diamond_pickaxe, 
-computercraft:wireless_modem_normal
-Returns
-1. boolean Whether the right tool is worn
-2. string | nil Details, example:
- "No empty slots" - Requires a free slot
- in the inventory for verification
- "Empty Hands" - You can use this hands
- "Empty Hand Right" - You can use this hand
- "Empty Hand Left" - You can use this hand
- "Not empty hands"
- --]]
-function TurtleTools.equipCheck(tool1, tool2)
-	local right, left, msg = TurtleTools.getToolsNames()
-	if msg then
-		return false, msg --"No empty slots"
-	end
-	if right==nil and left==nil then
-		msg = "Empty Hands"
-	elseif right and left then
-		msg = "Not empty hands"
-	elseif right then
-		msg = "Empty Hand Left"
-	elseif left then
-		msg = "Empty Hand Right"
-	end
-		
-	if tool1==nil and tool2==nil then
-		if right==nil and left==nil then
-			return true, msg
-		else
-			return false, msg
-		end
-	elseif tool1!=nil and tool2!=nil then
-		if (right==tool1 and left==tool2) or 
-		(right==tool2 and left==tool1) then
-			return true, msg
-		else
-			return false, msg
-		end
-	else
-		if (tool1!=nil and (tool1==right or tool1==left)) or 
-		(tool2!=nil and (tool2==right or tool2==left)) then
-			return true, msg
-		end
-	end
-end
-	
+
+
+
+
+
+
+
+
 	
 	
 	

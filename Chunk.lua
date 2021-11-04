@@ -5,7 +5,6 @@ Requires raw coordinates x, y (height), z
 Returns Chunk | nil (if the arguments are incorrect)
 --]]
 function Chunk:new(x, y, z)
-	print (x, y, z)
 	if type(x) ~= "number" or type(y) ~= "number" or type(z) ~= "number" then
 		return nil
 	end
@@ -21,9 +20,9 @@ function Chunk:new(x, y, z)
 		obj.cx = math.floor(x/16)
 		obj.cy = math.floor(y/16)
 		obj.cz = math.floor(z/16)
-		obj.xmin = cx * 16
+		obj.xmin = obj.cx * 16
 		obj.xmax = obj.xmin + 15
-		obj.ymin = cy * 16
+		obj.ymin = obj.cy * 16
 		obj.ymax = obj.ymin + 15
 		obj.zmin = obj.cz * 16
 		obj.zmax = obj.zmin + 15

@@ -59,7 +59,7 @@ function TurtleTools.getToolNameRight(tool)
 		hand = turtle.getItemDetail().name
 		turtle.equipRight()
 	end
-	if tool!=nil then
+	if tool~=nil then
 		if tool==hand then
 			equality = true
 		end
@@ -78,7 +78,7 @@ function TurtleTools.getToolNameLeft(tool)
 		hand = turtle.getItemDetail().name
 		turtle.equipLeft()
 	end
-	if tool!=nil then
+	if tool~=nil then
 		if tool==hand then
 			equality = true
 		end

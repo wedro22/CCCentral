@@ -1,20 +1,22 @@
 local TurtleTools = {}
 TurtleTools.str_pickaxe = "minecraft:diamond_pickaxe"
+TurtleTools.str_needfuel = "Put some fuel in the turtle's inventory"
+TurtleTools.str_fullinventory = "To work, the turtle needs free space in the inventory."
+TurtleTools.str_needpickaxe = "To work, the turtle needs a new diamond pickaxe. Put the pickaxe in the inventory"
 
-function TurtleTools.dofuelAll(dofuel, message)
-	if dofuel == nil then
-		dofuel = 1
+function TurtleTools.dofuelAll(dofuel)
+	dof = tonumber(dofuel)
+	if dof == nil then
+		dof = 1
+	elseif dof == 0 then
+		dof = 1
 	end
-	dofuel = tonumber(dofuel)
-	if dofuel == 0 then
-		dofuel = 1
-	end
-	if message and turtle.getFuelLevel()<dofuel then
-		print(message)
-	end
-	while turtle.getFuelLevel()<dofuel do
-		sleep(3)
+	while turtle.getFuelLevel() < dof do
 		shell.run("refuel all")
+		if turtle.getFuelLevel() >= dof then
+			return true
+		end
+		sleep(3)
 	end
 	return true
 end
@@ -120,8 +122,21 @@ function TurtleTools.equipTool(tool)
 		sleep(3)
 	end
 end
-	
 
+--[[Forced forward
+Breaks blocks and requires refueling
+Returns true]]
+function TurtleTools.forward_dig()
+	while not turtle.forward() do
+		if turtle.detect() then
+			turtle.dig()
+		elseif turtle.getFuelLevel()<1 then
+			print(str_needfuel)
+			TurtleTools.dofuelAll(1)
+		end
+	end
+	return true
+end
 
 
 

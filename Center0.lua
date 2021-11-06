@@ -68,6 +68,10 @@ facing = mon_detail.state.facing
 turtle.dig()
 print(facing)
 
+--Step 2----------------
+print("Step 2")
+print("Go to the beginning of construction")
+
 
 
 

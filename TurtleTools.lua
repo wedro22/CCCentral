@@ -212,10 +212,52 @@ function TurtleTools.waitListItems(tab, print_msg)
 	end
 end
 
+--turn south north west east
 
-
-
-
+function TurtleTools.north(side)
+	if side == "south" then
+		turtle.turnRight()
+		turtle.turnRight()
+	elseif side == "west" then
+		turtle.turnRight()
+	elseif side == "east" then
+		turtle.turnLeft()
+	end
+	return "north"
+end
+function TurtleTools.south(side)
+	if side == "north" then
+		turtle.turnRight()
+		turtle.turnRight()
+	elseif side == "east" then
+		turtle.turnRight()
+	elseif side == "west" then
+		turtle.turnLeft()
+	end
+	return "south"
+end
+function TurtleTools.west(side)
+	if side == "east" then
+		turtle.turnRight()
+		turtle.turnRight()
+	elseif side == "south" then
+		turtle.turnRight()
+	elseif side == "north" then
+		turtle.turnLeft()
+	end
+	return "west"
+end
+function TurtleTools.east(side)
+	if side == "west" then
+		turtle.turnRight()
+		turtle.turnRight()
+	elseif side == "north" then
+		turtle.turnRight()
+	elseif side == "south" then
+		turtle.turnLeft()
+	end
+	return "east"
+end
 
 
 

@@ -105,6 +105,21 @@ function TurtleTools.findInInventory(tool)
 	return 0
 end
 
+--Find the number of items in inventory
+function TurtleTools.getItemCount(item)
+	local i = 0
+	local it --ItemDetail
+	for n = 1, 16 do
+		it = turtle.getItemDetail(n)
+		if it then
+			if it.name == item then
+				i = i + it.count
+			end
+		end
+	end
+	return i
+end
+
 --[[Equip item in inventory by name
  Parameter tool:string exact name,
  example: minecraft:diamond_pickaxe
@@ -133,15 +148,60 @@ function TurtleTools.forward_dig()
 		elseif turtle.getFuelLevel()<1 then
 			print(str_needfuel)
 			TurtleTools.dofuelAll(1)
+		else
+			sleep(0.3)
+		end
+	end
+	return true
+end
+--[[Forced placed
+Breaks blocks, placed blocks or waiting
+Returns true]]
+function TurtleTools.forward_place()
+	while not turtle.place() do
+		if turtle.detect() then
+			turtle.dig()
+		else
+			sleep(0.3)
 		end
 	end
 	return true
 end
 
-
-
-
-
+--[[Waiting for a list of items
+Requires:
+ tab:table. Must have a structure:
+ {mod_id:id = {"Name", number}}
+ Example:{"minecraft:chest" = {"Chest", 1}},
+ print_msg:string. If nil, does not print
+ Otherwise prints self and
+ missing_number Name
+ Example: 0 Chest
+Returns: true
+--]]
+function TurtleTools.waitListItems(tab, print_msg)
+	if print_msg then
+		term.clear()
+		term.setCursorPos(1, 1)
+		print(print_msg)
+	end
+	local count
+	local equality
+	while true do
+		equality = true
+		for key, val in pairs(tab) do
+			count = TurtleTools.getItemCount(key)
+			if val[2] < count then
+				print(val[2] - count, val[1])
+				equality = false
+			end
+		end
+		if equality == true then
+			return true
+		end
+		sleep(3)
+	end
+end
 
 
 

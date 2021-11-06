@@ -50,7 +50,7 @@ Returns
   "No empty slot" (Only if there is no empty space in the inventory)
   | (getting the name of the tool. If the tool name = nil, then returns "")
  2. boolean (checking the equality of the tool name and the tool argument) --]]
-function TurtleTools.getToolNameRight(tool)
+--[[function TurtleTools.getToolNameRight(tool)
 	local slot = TurtleTools.selectEmptySlot()
 	local hand = ""
 	local equality = false
@@ -87,17 +87,19 @@ function TurtleTools.getToolNameLeft(tool)
 		end
 	end
 	return hand, equality
-end
+end--]]
 
 --[[Find item in inventory by name
- Parameter tool:string exact name,
+ Parameter item:string exact name,
  example: minecraft:diamond_pickaxe
  Returns a slot number (1..16) 
  or 0 if not detected --]]
-function TurtleTools.findInInventory(tool)
+function TurtleTools.getItem(item)
+	local it --ItemDetail
 	for n = 1, 16 do
-		if turtle.getItemCount(n) > 0 then
-			if turtle.getItemDetail(n).name == tool then
+		it = turtle.getItemDetail(n)
+		if it then
+			if it.name == item then
 				return n
 			end
 		end
@@ -120,22 +122,26 @@ function TurtleTools.getItemCount(item)
 	return i
 end
 
---[[Equip item in inventory by name
- Parameter tool:string exact name,
- example: minecraft:diamond_pickaxe
- Returns true when equipped --]]
-function TurtleTools.equipTool(tool)
-	local slot
-	while true do
-		slot=TurtleTools.findInInventory(tool)
-		if slot > 0 then
-			turtle.select(slot)
-			if turtle.equipRight() then
-				return true
-			end
-		end
+function TurtleTools.waitFreeSlot()
+	if TurtleTools.findEmptySlot() == 0 then
+		print(TurtleTools.str_fullinventory)
+	end
+	while TurtleTools.findEmptySlot() == 0 do
 		sleep(3)
 	end
+	return true
+end
+
+--Disarming a turtle
+function TurtleTools.disarm()
+	while TurtleTools.selectEmptySlot() == 0 do
+		TurtleTools.waitFreeSlot()
+	end
+	turtle.equipRight()
+	while TurtleTools.selectEmptySlot() == 0 do
+		TurtleTools.waitFreeSlot()
+	end
+	turtle.equipLeft()
 end
 
 --[[Forced forward

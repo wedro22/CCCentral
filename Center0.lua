@@ -1,6 +1,7 @@
 --package.path="/downloads/CCCentral"
 local turtletools=require "TurtleTools"
 local chunk=require "Chunk"
+local firmware=require "Firmware"
 
 local min_fuel = 200
 local facing = nil
@@ -9,60 +10,58 @@ local facing = nil
 term.clear()
 term.setCursorPos(1, 1)
 print("Step 0: Preparing the turtle for work")
+
 --fuel
 if turtle.getFuelLevel() < min_fuel then
 	print(turtletools.str_needfuel)
 	turtletools.dofuelAll(min_fuel)
 end
+
+--disarm
+turtletools.disarm()
+
 --inventory
 local items_center0 = {
 	["computercraft:monitor_advanced"] = 		{"Advanced Monitor", 	6},
 	["computercraft:computer_advanced"] = 		{"Advanced Computer", 	1},
+	["computercraft:computer_normal"] = 		{"Computer", 			4},
+	["computercraft:wireless_modem_normal"] = 	{"Wireless Modem", 		5},
 	["minecraft:chest"] = 						{"Chest", 				1},
-	["minecraft:stone_bricks"] = 				{"Stone Bricks", 		56},
+	["minecraft:stone_bricks"] = 				{"Stone Bricks", 		52},
 	["minecraft:sandstone"] = 					{"Sandstone", 			8},
 	["minecraft:sandstone_stairs"] = 			{"Sandstone Stairs", 	12},
-	["minecraft:sandstone_slab"] = 				{"Sandstone Slab", 		4}
+	["minecraft:sandstone_slab"] = 				{"Sandstone Slab", 		4},
+	["minecraft:diamond_pickaxe"] = 			{"Diamond Pickaxe", 	1}
 }
 turtletools.waitListItems(items_center0, 
 "To build, put next items in the turtle inventory:")
 
---inventory_free
-if turtletools.findEmptySlot() == 0 then
-	print(turtletools.str_fullinventory)
-end
-while turtletools.findEmptySlot() == 0 do
-	sleep(3)
-end
 --pickaxe
-local h, b = turtletools.getToolNameRight(turtletools.str_pickaxe)
-if b == false then
-	h, b = turtletools.getToolNameLeft(turtletools.str_pickaxe)
-	if b == false then
-		print(turtletools.str_needpickaxe)
-	else
-		turtletools.selectEmptySlot()
-		turtle.equipLeft()
-		turtle.equipRight()
+turtle.select(turtletools.getItem("minecraft:diamond_pickaxe"))
+if not turtle.equipRight() then
+	print("Replace the pickaxe with an unused one")
+	while not turtle.equipRight() do
+		sleep(3)
+		turtle.select(turtletools.getItem("minecraft:diamond_pickaxe"))
 	end
 end
-if b == false then
-	turtletools.equipTool(turtletools.str_pickaxe)
-end
+--modem
+turtle.select(
+turtletools.getItem("computercraft:wireless_modem_normal"))
+turtle.equipLeft()
 
 --Step 1----------------
 term.clear()
 term.setCursorPos(1, 1)
 --coordinates
-print("Structures will be built in the middle of the chanks")
+print("Structure will be built in the middle of this chank")
 print("Step 1: Finding a location in the world")
 print("Write the current coordinates of the turtle")
 write("X:.. "); local x = read()
 write("Y:.. "); local y = read()
 write("Z:.. "); local z = read()
 --facing
-local mon = turtletools.findInInventory("computercraft:monitor_advanced")
-turtle.select(mon)
+turtle.select(turtletools.findInInventory("computercraft:monitor_advanced"))
 turtletools.forward_place()
 local mon_is, mon_detail = turtle.inspect()
 facing = mon_detail.state.facing

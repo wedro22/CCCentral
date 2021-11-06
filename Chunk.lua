@@ -26,16 +26,17 @@ function Chunk:new(x, y, z)
 		obj.ymax = obj.ymin + 15
 		obj.zmin = obj.cz * 16
 		obj.zmax = obj.zmin + 15
+		obj.ve
 		
 	--Location in the chank from 0 to 15
 	function obj:getLocal()
 		return obj.x-obj.xmin, obj.y-obj.ymin, obj.z-obj.zmin
 	end
 	
-	--get x, z Chunk center (offset to a minimum)
+	--[[get x, z Chunk center (offset to a minimum)
 	function obj:getCentral()
 		return obj.xmin+7, obj.zmin+7
-	end
+	end--]]
 	
 	--return obj
 	setmetatable(obj, self)

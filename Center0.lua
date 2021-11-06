@@ -65,6 +65,7 @@ turtle.select(turtletools.getItem("computercraft:monitor_advanced"))
 turtletools.forward_place()
 local mon_is, mon_detail = turtle.inspect()
 facing = mon_detail.state.facing
+turtle.dig()
 print(facing)
 
 

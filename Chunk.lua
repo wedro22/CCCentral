@@ -41,7 +41,10 @@ function Chunk:new(x, y, z)
 end
 
 function Chunk.getLocal(x, y, z, chunk)
-	return x-chunk.obj.xmin, y-chunk.obj.ymin, z-chunk.obj.zmin
+	if not chunk then
+		return x-math.floor(x/16)*16, y-math.floor(y/16)*16, z-math.floor(z/16)*16
+	end
+	return x-chunk.xmin, y-chunk.ymin, z-chunk.zmin
 end
 
 

@@ -64,7 +64,7 @@ write("Z:.. "); local z = read()
 local mon = turtletools.findInInventory("computercraft:monitor_advanced")
 turtle.select(mon)
 turtletools.forward_place()
-local mon_is, mon_detail = turtle.detect()
+local mon_is, mon_detail = turtle.inspect()
 facing = mon_detail.state.facing
 print(facing)
 

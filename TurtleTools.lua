@@ -165,6 +165,9 @@ function TurtleTools.forward_place()
 			sleep(0.3)
 		end
 	end
+	while not turtle.detect() do
+		sleep(0)
+	end
 	return true
 end
 

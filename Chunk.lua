@@ -14,22 +14,19 @@ function Chunk:new(x, y, z)
 	 cx, cy, cz - chunk coordinates
 	 xmin, .. , zmax - chunk border --]]
 	local obj = {}
-		obj.x = x
-		obj.y = y
-		obj.z = z
-		obj.cx = math.floor(x/16)
-		obj.cy = math.floor(y/16)
-		obj.cz = math.floor(z/16)
-		obj.xmin = obj.cx * 16
+		obj.x = math.floor(x/16)
+		obj.y = math.floor(y/16)
+		obj.z = math.floor(z/16)
+		obj.xmin = obj.x * 16
 		obj.xmax = obj.xmin + 15
-		obj.ymin = obj.cy * 16
+		obj.ymin = obj.y * 16
 		obj.ymax = obj.ymin + 15
-		obj.zmin = obj.cz * 16
+		obj.zmin = obj.z * 16
 		obj.zmax = obj.zmin + 15
 		
 	--Location in the chank from 0 to 15
-	function obj:getLocal()
-		return obj.x-obj.xmin, obj.y-obj.ymin, obj.z-obj.zmin
+	function obj:getLocal(x, y, z)
+		return x-obj.xmin, y-obj.ymin, z-obj.zmin
 	end
 	
 	--[[get x, z Chunk center (offset to a minimum)
@@ -43,7 +40,9 @@ function Chunk:new(x, y, z)
 	return obj
 end
 
-
+function Chunk.getLocal(x, y, z, chunk)
+	return x-chunk.obj.xmin, y-chunk.obj.ymin, z-chunk.obj.zmin
+end
 
 
 return Chunk

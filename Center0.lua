@@ -24,10 +24,10 @@ turtletools.disarm()
 local items_center0 = {
 	["computercraft:monitor_advanced"] = 		{"Advanced Monitor", 	6},
 	["computercraft:computer_advanced"] = 		{"Advanced Computer", 	1},
-	["computercraft:computer_normal"] = 		{"Computer", 			4},
-	["computercraft:wireless_modem_normal"] = 	{"Wireless Modem", 		5},
+	--["computercraft:computer_normal"] = 		{"Computer", 			4},
+	--["computercraft:wireless_modem_normal"] = 	{"Wireless Modem", 		5},
 	["minecraft:chest"] = 						{"Chest", 				1},
-	["minecraft:stone_bricks"] = 				{"Stone Bricks", 		52},
+	["minecraft:stone_bricks"] = 				{"Stone Bricks", 		56},
 	["minecraft:sandstone"] = 					{"Sandstone", 			8},
 	["minecraft:sandstone_stairs"] = 			{"Sandstone Stairs", 	12},
 	["minecraft:sandstone_slab"] = 				{"Sandstone Slab", 		4},
@@ -46,9 +46,9 @@ if not turtle.equipRight() then
 	end
 end
 --modem
-turtle.select(
+--[[turtle.select(
 turtletools.getItem("computercraft:wireless_modem_normal"))
-turtle.equipLeft()
+turtle.equipLeft()--]]
 
 --Step 1----------------
 term.clear()

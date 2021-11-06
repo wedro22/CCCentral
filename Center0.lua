@@ -16,13 +16,13 @@ if turtle.getFuelLevel() < min_fuel then
 end
 --inventory
 local items_center0 = {
-	"computercraft:monitor_advanced" = 		{"Advanced Monitor", 	6},
-	"computercraft:computer_advanced" = 	{"Advanced Computer", 	1},
-	"minecraft:chest" = 					{"Chest", 				1},
-	"minecraft:stone_bricks" = 				{"Stone Bricks", 		56},
-	"minecraft:sandstone" = 				{"Sandstone", 			8},
-	"minecraft:sandstone_stairs" = 			{"Sandstone Stairs", 	12},
-	"minecraft:sandstone_slab" = 			{"Sandstone Slab", 		4}
+	computercraft:monitor_advanced = 		{"Advanced Monitor", 	6},
+	computercraft:computer_advanced = 		{"Advanced Computer", 	1},
+	minecraft:chest = 						{"Chest", 				1},
+	minecraft:stone_bricks = 				{"Stone Bricks", 		56},
+	minecraft:sandstone = 					{"Sandstone", 			8},
+	minecraft:sandstone_stairs = 			{"Sandstone Stairs", 	12},
+	minecraft:sandstone_slab = 				{"Sandstone Slab", 		4}
 }
 turtletools.waitListItems(items_center0, 
 "To build, put next items in the turtle inventory:")

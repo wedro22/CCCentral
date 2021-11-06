@@ -180,18 +180,18 @@ Requires:
 Returns: true
 --]]
 function TurtleTools.waitListItems(tab, print_msg)
-	if print_msg then
-		term.clear()
-		term.setCursorPos(1, 1)
-		print(print_msg)
-	end
 	local count
 	local equality
 	while true do
+		if print_msg then
+			term.clear()
+			term.setCursorPos(1, 1)
+			print(print_msg)
+		end
 		equality = true
 		for key, val in pairs(tab) do
 			count = TurtleTools.getItemCount(key)
-			if val[2] < count then
+			if count < val[2] then
 				print(val[2] - count, val[1])
 				equality = false
 			end

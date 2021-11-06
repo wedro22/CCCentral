@@ -54,14 +54,14 @@ turtle.equipLeft()
 term.clear()
 term.setCursorPos(1, 1)
 --coordinates
-print("Structure will be built in the middle of this chank")
+print("Structure will be built in the middle of this Chunk")
 print("Step 1: Finding a location in the world")
 print("Write the current coordinates of the turtle")
 write("X:.. "); local x = read()
 write("Y:.. "); local y = read()
 write("Z:.. "); local z = read()
 --facing
-turtle.select(turtletools.findInInventory("computercraft:monitor_advanced"))
+turtle.select(turtletools.getItem("computercraft:monitor_advanced"))
 turtletools.forward_place()
 local mon_is, mon_detail = turtle.inspect()
 facing = mon_detail.state.facing

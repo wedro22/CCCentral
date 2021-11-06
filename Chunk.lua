@@ -26,7 +26,6 @@ function Chunk:new(x, y, z)
 		obj.ymax = obj.ymin + 15
 		obj.zmin = obj.cz * 16
 		obj.zmax = obj.zmin + 15
-		obj.ve
 		
 	--Location in the chank from 0 to 15
 	function obj:getLocal()
